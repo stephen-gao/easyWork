@@ -7,3 +7,4 @@
 *.prefs
 *.class
 /target/*
+/target/
