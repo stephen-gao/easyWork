@@ -30,6 +30,21 @@ public class TeacherServiceImpl implements ITeacherService{
 	public void save(Teacher po) {
 		teacherDao.insert(po);
 	}
+
+	@Override
+	public void update(Teacher po) {
+		teacherDao.update(po);
+	}
+
+	@Override
+	public void delete(Integer id) {
+		teacherDao.delete(id);
+	}
+
+	@Override
+	public TeacherVO getVOById(Integer id) {
+		return teacherDao.getVOById(id);
+	}
 	
 	
 }

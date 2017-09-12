@@ -3,13 +3,37 @@
 <mapper namespace="com.gs.teacher.dao.ITeacherDao">
 
     <select id="findAll" resultType="TeacherVO">
-        select * from t_teacher
+        select id, name, gender, tel from t_teacher
     </select>
     
     <insert id="insert" parameterType="Teacher">
         <selectKey order="AFTER" keyProperty="id" resultType="int">
             SELECT LAST_INSERT_ID() AS id
-        </selectKey>aaa
-        INSERT INTO t_teacher (name, gender, tel) VALUES (#{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER},, #{tel,jdbcType=VARCHAR})
-    </insert> 
+        </selectKey>
+        INSERT INTO t_teacher (name, gender, tel) VALUES (#{name,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER}, #{tel,jdbcType=VARCHAR})
+    </insert>
+    
+    <update id="uodate" parameterType="Teacher">
+        UPDATE t_teacher 
+            <trim prefix="set" suffixOverrides=",">
+                <if test="name!=null and name!=''">
+			        name=#{name,jdbcType=VARCHAR}, 
+				</if>
+				<if test="gender!=null">
+			        gender=#{gender,jdbcType=INTEGER}, 
+			    </if>
+                <if test="tel!=null and tel!=''">
+			        tel=#{tel,jdbcType=VARCHAR} 
+		        </if>
+			</trim>
+        WHERE (id=#{id,jdbcType=INTEGER})
+    </update>
+    
+    <delete id="delete" parameterType="java.lang.Integer">
+        DELETE FROM t_teacher WHERE id=#{id,jdbcType=INTEGER}
+    </delete>
+    
+    <select id="getVOById" parameterType="java.lang.Integer" resultType="TeacherVO">
+        select id, name, gender, tel from t_teacher where id=#{id,jdbcType=INTEGER}
+    </select>
 </mapper>
