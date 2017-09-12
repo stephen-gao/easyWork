@@ -3,7 +3,7 @@
 .gitattributes
 .gitattributes
 .project
-.settings/.jsdtscope
+/.settings/*
 *.prefs
 *.class
 /target/*
