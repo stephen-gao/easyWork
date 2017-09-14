@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gs.framework.auth.dao.IAuthDao">
+	
+	<select id="findAll" resultType="Auth">
+		SELECT * FROM t_auth
+	</select>
+	
+	<select id="getAuthById" resultType="Auth">
+		SELECT * FROM t_auth where id = #{id}
+	</select>
+	
+	<select id="getAuthByRoleId" resultType="Auth">
+		SELECT ta.id as id ,ta.auth_name as authName from t_auth ta INNER JOIN t_role_auth tra ON ta.id = tra.auth_id WHERE tra.role_id = #{id}
+	</select>
+	
+	<select id="getAuthByUserId" resultType="Auth">
+		SELECT ta.id as id ,ta.auth_name as authName from t_auth ta INNER JOIN t_role_auth tra ON ta.id = tra.auth_id INNER JOIN t_user_role tur ON tra.role_id = tur.role_id WHERE tur.user_id = #{id}
+	</select>
+</mapper>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gs.framework.role.dao.IRoleDao">
+	
+	<select id="findAll" resultType="Role">
+		SELECT * FROM t_role
+	</select>
+	
+	<select id="getRoleById" resultType="Role">
+		SELECT * FROM t_role where id = #{id}
+	</select>
+	
+	<select id="getRoleByUserId" resultType="Role">
+		select tr.id as id,tr.role_name as roleName from t_role tr INNER JOIN t_user_role tur ON tr.id = tur.role_id WHERE tur.user_id = #{id}
+	</select>
+</mapper>
